@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2004 Christophe Beauregard
 #
-# $Id: Doc.pm,v 1.9 2004/04/13 01:06:16 cpb Exp $
+# $Id: Doc.pm,v 1.10 2004/04/15 01:56:05 cpb Exp $
 
 use strict;
 
@@ -14,7 +14,7 @@ use Palm::PDB;
 use Palm::Raw();
 use vars qw( $VERSION @ISA );
 
-$VERSION = do { my @r = (q$Revision: 1.9 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.10 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
 
 @ISA = qw( Palm::Raw );
 
@@ -245,8 +245,8 @@ sub _decompress_record($$) {
 			my $n = ($och & 0x7) + 3;
 
 			# This isn't very perl-like, but a simple substr($out,$lo-$m,$n) doesn't work.
-			for( my $j = 0; $j < $n; $j ++ ) {
-				my $lo = length $out;
+			my $lo = length $out;
+			for( my $j = 0; $j < $n; $j ++, $lo ++ ) {
 				$out .= substr( $out, $lo-$m, 1 );
 			}
 		}

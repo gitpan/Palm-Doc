@@ -1,3 +1,19 @@
+2004-04-14 21:56  cpb
+
+	* META.yml: don't need to commit that
+
+2004-04-14 21:56  cpb
+
+	* Doc.pm: minor loop optimization
+
+2004-04-14 21:55  cpb
+
+	* mobisucks: need to keep space when we remove line breaks
+
+2004-04-14 21:54  cpb
+
+	* makepalmdoc: minor undef bug fix
+
 2004-04-12 21:09  cpb
 
 	* Makefile.PL, makedoc, makepalmdoc, MANIFEST: renamed makedoc to

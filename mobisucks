@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# $Id: mobisucks,v 1.2 2004/04/13 01:06:00 cpb Exp $
+# $Id: mobisucks,v 1.3 2004/04/15 01:55:52 cpb Exp $
 
 use strict;
 use HTML::TreeBuilder;
@@ -24,7 +24,7 @@ my $text = $formatter->format( $tree );
 # FormatText's margins aren't really appropriate for PDA reading. Better to
 # remove them entirely and let the reader handle that stuff. We really should
 # just write our own formatter around HTML::TreeBuilder...
-$text =~ s!([^\n])\n([^\n])!\1\2!sg;
+$text =~ s!([^\n])\n([^\n])!\1 \2!sg;
 
 $doc->text( $text );
 $doc->Write( $ARGV[0] );

@@ -2,7 +2,7 @@
 #
 # perl version of makedoc
 #
-# $Id: makepalmdoc,v 1.1 2004/04/13 01:09:10 cpb Exp $
+# $Id: makepalmdoc,v 1.2 2004/04/15 01:54:22 cpb Exp $
 
 use strict;
 use Getopt::Std;
@@ -28,7 +28,7 @@ if( $opt_d ) {
 } else {
 	my $doc = new Palm::Doc;
 	$doc->textfile( $ARGV[0] );
-	$doc->{'name'} = $ARGV[2] if $ARGV[2] ne "";
+	$doc->{'name'} = $ARGV[2] if defined $ARGV[2];
 	$doc->Write( $ARGV[1] );
 }
 
@@ -45,7 +45,7 @@ END
 
 sub VERSION_MESSAGE {
 	my $VERSION = do {
-		my @r = (q$Revision: 1.1 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r
+		my @r = (q$Revision: 1.2 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r
 	};
 	print $VERSION, "\n";
 }
