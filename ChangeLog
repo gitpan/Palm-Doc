@@ -1,3 +1,22 @@
+2004-10-07 19:52  cpb
+
+	* MANIFEST, test.pl: okay, cuckoos is a bit large for distribution
+
+2004-10-07 18:42  cpb
+
+	* MANIFEST, Makefile.PL, test.pl: *: use Test::More
+	
+	*: add cuckoos.prc to test script and MANIFEST
+
+2004-10-07 17:38  cpb
+
+	* Doc.pm: force version increment
+
+2004-10-07 17:36  cpb
+
+	* Makefile.PL: gruesome hack to force installation of p5-Palm if
+	it's missing. It's probably better if I don't explain further.
+
 2004-10-05 17:13  cpb
 
 	* Makefile.PL: remove some quotes
