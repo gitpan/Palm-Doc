@@ -1,3 +1,33 @@
+2004-06-12 21:16  cpb
+
+	* MANIFEST, Makefile.PL, htmltopalmdoc: added simple and stupid
+	HTML to Palm Doc converter.
+
+2004-06-12 20:03  cpb
+
+	* Doc.pm: add some documentation covering PalmOS character sets.
+
+2004-06-12 20:03  cpb
+
+	* test.pl: use latin1.txt rather than README for test purposes.
+
+2004-06-12 20:02  cpb
+
+	* MANIFEST: added latin1.txt test file
+
+2004-06-12 19:59  cpb
+
+	* latin1.txt: added a latin-1 test file
+
+2004-06-12 19:58  cpb
+
+	* makepalmdoc: handle character set conversion
+
+2004-04-14 22:25  cpb
+
+	* makepalmdoc, mobisucks, test.pl: instantiate Palm::PDB for
+	loading
+
 2004-04-14 21:56  cpb
 
 	* META.yml: don't need to commit that

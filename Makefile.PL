@@ -10,5 +10,5 @@ WriteMakefile(
 	'PREREQ_PM' => {
 		'Palm::PDB' => '1',
 	},
-	'EXE_FILES' => [ 'makepalmdoc', 'mobisucks' ],
+	'EXE_FILES' => [ 'makepalmdoc', 'mobisucks', 'htmltopalmdoc' ],
 );

@@ -19,17 +19,19 @@ print "ok 1\n";
 # of the test code):
 
 use Palm::PDB;
+use Encode 'decode';
 
 my $doc = new Palm::Doc;
 
-$doc->textfile( 'README' );
-$doc->Write( 'README.pdb' );
+$doc->textfile( 'latin1.txt' );
+$doc->Write( 'latin1.pdb' );
 
 $doc->{attributes}{resource} = 1;
-$doc->textfile( 'README' );
-$doc->Write( 'README.prc' );
+$doc->textfile( 'latin1.txt' );
+$doc->Write( 'latin1.prc' );
 
-$doc->Load( 'README.prc' );
-print $doc->text(), "\n\n";
+$doc = new Palm::PDB;
+$doc->Load( 'latin1.prc' );
+print decode( "iso-8859-1", $doc->text()), "\n\n";
 
 exit 0;

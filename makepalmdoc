@@ -2,12 +2,13 @@
 #
 # perl version of makedoc
 #
-# $Id: makepalmdoc,v 1.2 2004/04/15 01:54:22 cpb Exp $
+# $Id: makepalmdoc,v 1.4 2004/06/12 23:58:37 cpb Exp $
 
 use strict;
 use Getopt::Std;
 use Palm::PDB;
 use Palm::Doc;
+use Encode 'decode';
 
 $Getopt::Std::STANDARD_HELP_VERSION = 1;
 
@@ -20,10 +21,10 @@ if( @ARGV < 2 ) {
 }
 
 if( $opt_d ) {
-	my $doc = new Palm::Raw;
+	my $doc = new Palm::PDB;
 	$doc->Load( $ARGV[0] );
 	open F, "> $ARGV[1]" or die "$!";
-	print F $doc->text();
+	print F decode( "iso-8859-1", $doc->text(), Encode::FB_WARN );
 	close F;
 } else {
 	my $doc = new Palm::Doc;
@@ -45,7 +46,7 @@ END
 
 sub VERSION_MESSAGE {
 	my $VERSION = do {
-		my @r = (q$Revision: 1.2 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r
+		my @r = (q$Revision: 1.4 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r
 	};
 	print $VERSION, "\n";
 }
@@ -65,9 +66,13 @@ makepalmdoc - convert between text and pdb/prc Palm Doc files
 
 =head1 DESCRIPTION
 
-makepalmdoc is a simple Palm Doc database generator. It's roughly similar to the C++
-makedoc, although the compression flag is ignored (created databases are always
-compressed).
+makepalmdoc is a simple Palm Doc database generator. It's roughly
+similar to the C++ makedoc, although the compression flag is ignored
+(created databases are always compressed).
+
+=head1 BUGS
+
+Only handles ISO 8859-1 encoded books (i.e. non-asian).
 
 =head1 AUTHOR
 

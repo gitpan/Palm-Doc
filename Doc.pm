@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2004 Christophe Beauregard
 #
-# $Id: Doc.pm,v 1.10 2004/04/15 01:56:05 cpb Exp $
+# $Id: Doc.pm,v 1.11 2004/06/13 00:03:29 cpb Exp $
 
 use strict;
 
@@ -14,7 +14,7 @@ use Palm::PDB;
 use Palm::Raw();
 use vars qw( $VERSION @ISA );
 
-$VERSION = do { my @r = (q$Revision: 1.10 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.11 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
 
 @ISA = qw( Palm::Raw );
 
@@ -32,10 +32,11 @@ use Palm::Doc;
 
 =head1 DESCRIPTION
 
-Helper for reading Palm Doc books. The interface is based on Palm::ZText since it
-just makes sense. However, because of the nature of these databases, record-level
-processing is just a Bad Idea. Use the C<text> and C<textfile> calls rather than do
-direct access of the C<@records> array.
+Helper for reading and writing Palm Doc books. The interface is based on
+Palm::ZText since it just makes sense. However, because of the nature
+of these databases, record-level processing is just a Bad Idea. Use
+the C<text> and C<textfile> calls rather than do direct access of the
+C<@records> array.
 
 =head1 EXAMPLES
 
@@ -107,8 +108,9 @@ sub _parse_headerrec($) {
 	my ($version,$spare,$ulen, $records, $recsize, $position)
 		= unpack( 'n n N n n N', $record->{'data'} );
 
-	# the header is followed by a list of record sizes. We don't use this since we can
-	# guess the sizes pretty easily by looking at the actual records.
+	# the header is followed by a list of record sizes. We don't use
+	# this since we can guess the sizes pretty easily by looking at
+	# the actual records.
 
 	# According to the spec, $version is either 1 (uncompressed)
 	# or 2 (compress), while spare is always zero. AportisDoc supposedly sets
@@ -149,7 +151,7 @@ sub _compress_record($$) {
 			my $preamble = substr( $in, 0, $i );
 			for( my $j = 10; $j >= 3; $j -- ) {
 				$chunk = substr( $in, $i, $j );	# grab next $j characters
-				$match = rindex( $preamble, $chunk );	# see if they're in the output
+				$match = rindex( $preamble, $chunk );	# in the output?
 
 				# type B code has a 2047 byte sliding window, so matches have to be
 				# within that range to be useful
@@ -347,6 +349,7 @@ sub textfile($$) {
 	my ($self, $filename) = @_;
 
 	open IN, "< $filename" or return undef;
+	binmode IN;
 	$self->text( '', <IN> );
 	close IN;
 
@@ -360,8 +363,40 @@ __END__
 
 Bookmarks are unsupported. I've never had any use for them.
 
-Output databases are always compressed and there's no option to disable compression.
-I consider this a feature, to be honest.
+Output databases are always compressed and there's no option to
+disable compression.  I consider this a feature, to be honest.
+
+=head2 Note Character Sets
+
+L<Palm::Doc> doesn't do anything with character sets. This might be a bug,
+depending on how you feel about this kind of thing, but the reality is that
+we're generally converting between text and Doc files, neither of which are
+real great at telling us what encoding we're supposed to use.
+
+My understanding of PalmOS character sets is that Doc books should be
+encoded in either Windows Code Page 1252 or, for Japanese, 932. Actually,
+the PalmOS encoding is a small variation on those. In practice, ISO 8859-1
+works okay for western languages which is real nice because L<Encode>
+doesn't know about the PalmOS stuff. 
+
+This gist of all this is that when you're creating a L<Palm::Doc>, you may
+need to do something along the lines of:
+
+	use Encode 'from_to';
+
+	my $text = read_my_text();
+	from_to( $text, $charset, 'iso-8859-1' ) unless $charset =~ /8859-1$/;
+	my $doc = new Palm::Doc();
+	$doc->text( $text );
+
+And when you're reading a L<Palm::Doc> and you care about the character
+set, you're pretty much going to have to guess the encoding and act
+appropriately:
+
+	use Encode 'decode';
+	my $doc = new Palm::PDB;
+	$doc->Load( $pdbname );
+	my $text = decode("iso-8859-1", $doc->text());
 
 =head1 AUTHOR
 
@@ -375,11 +410,14 @@ Palm::ZText(3)
 
 makedoc
 
-http://www.pyrite.org/doc_format.html
+L<http://www.pyrite.org/doc_format.html>
 
-http://patb.dyndns.org/Programming/PilotDoc.htm
+L<http://patb.dyndns.org/Programming/PilotDoc.htm>
 
 Palm::PalmDoc(3) is another CPAN module for handling Doc databases,
 but doesn't use Palm::PDB and doesn't handle reading Docs.
+
+L<http://www.df.lth.se/~triad/krad/recode/palm.html> for details on PalmOS
+text encoding
 
 =cut
