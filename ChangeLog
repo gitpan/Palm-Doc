@@ -1,0 +1,78 @@
+2004-04-12 01:04  cpb
+
+	* Doc.pm: no compression comment
+
+2004-04-12 01:02  cpb
+
+	* makedoc: added POD
+
+2004-04-12 01:02  cpb
+
+	* MANIFEST: added makedoc and mobisucks
+
+2004-04-12 01:02  cpb
+
+	* mobisucks: initial commit
+
+2004-04-12 00:50  cpb
+
+	* Doc.pm: - fixed an off-by-one in compression - added more docs
+
+2004-04-12 00:10  cpb
+
+	* makedoc: use our
+
+2004-04-12 00:10  cpb
+
+	* Doc.pm: - handle type B decompression one character at a time -
+	documentation cleanups
+
+2004-04-11 23:32  cpb
+
+	* Doc.pm: - compression/decompression now works correctly.  -
+	restructuring... the whole "make sane" concept is too unweildy to
+	actually work
+
+2004-04-09 00:39  cpb
+
+	* Doc.pm: more fixes
+
+2004-04-09 00:39  cpb
+
+	* test.pl: resource, convert to text
+
+2004-04-09 00:39  cpb
+
+	* makedoc: mostly implemented
+
+2004-04-09 00:05  cpb
+
+	* makedoc: works, kinda
+
+2004-04-08 23:56  cpb
+
+	* Doc.pm: - implemented decompress. Might even work.  - handle
+	resource databases.
+
+2004-04-08 23:56  cpb
+
+	* makedoc: added empty
+
+2004-04-08 22:56  cpb
+
+	* test.pl: make test script do something interesting
+
+2004-04-08 22:47  cpb
+
+	* Doc.pm: runs
+
+2004-04-08 21:07  cpb
+
+	* Doc.pm, MANIFEST, META.yml, Makefile.PL, README, test.pl: Initial
+	revision
+
+2004-04-08 21:07  cpb
+
+	* Doc.pm, MANIFEST, META.yml, Makefile.PL, README, test.pl: initial
+	import
+

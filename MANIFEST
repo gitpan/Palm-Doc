@@ -1,0 +1,9 @@
+MANIFEST
+Makefile.PL
+Doc.pm
+README
+test.pl
+ChangeLog
+META.yml                                 Module meta-data (added by MakeMaker)
+makedoc
+mobisucks

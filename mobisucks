@@ -1,0 +1,46 @@
+#!/usr/bin/perl -w
+#
+# $Id: mobisucks,v 1.1 2004/04/12 05:02:12 cpb Exp $
+
+use strict;
+use HTML::TreeBuilder;
+use HTML::FormatText;
+use Palm::PDB;
+use Palm::Doc;
+
+my $doc = new Palm::Doc;
+$doc->Load( $ARGV[0] );
+
+my $tree = HTML::TreeBuilder->new_from_content( $doc->text() );
+my $formatter = HTML::FormatText->new( leftmargin => 0, rightmargin => 80 );
+
+$doc->text( $formatter->format( $tree ) );
+$doc->Write( $ARGV[0] );
+
+exit 0;
+
+__END__
+
+=head1 NAME
+
+mobisucks - convert Mobipocket reader files to regular text Palm Docs.
+
+=head1 SYNOPSIS
+
+	mobisucks <database>
+
+=head1 DESCRIPTION
+
+I hate Mobipocket reader, but it's used by quite a few ebook providers
+(http://www.baen.com/library/, http://www.blackmask.com/, etc) rather than a more
+useful format like straight PalmDoc, Ztxt, or even Plucker. This little script
+converts Mobipocket to bog-standard text.
+
+=head1 AUTHOR
+
+Christophe Beauregard E<lt>cpb@cpan.orgE<gt>
+
+=head1 SEE ALSO
+
+Palm::Doc(3)
+

@@ -1,0 +1,80 @@
+#!/usr/bin/perl -w
+#
+# perl version of makedoc
+#
+# $Id: makedoc,v 1.5 2004/04/12 05:02:20 cpb Exp $
+
+use strict;
+use Getopt::Std;
+use Palm::PDB;
+use Palm::Doc;
+
+$Getopt::Std::STANDARD_HELP_VERSION = 1;
+
+our ($opt_n,$opt_d) = (0,0);
+getopts('nd');
+
+if( @ARGV < 2 ) {
+	HELP_MESSAGE();
+	exit -1;
+}
+
+if( $opt_d ) {
+	my $doc = new Palm::Raw;
+	$doc->Load( $ARGV[0] );
+	open F, "> $ARGV[1]" or die "$!";
+	print F $doc->text();
+	close F;
+} else {
+	my $doc = new Palm::Doc;
+	$doc->textfile( $ARGV[0] );
+	$doc->{'name'} = $ARGV[2] if $ARGV[2] ne "";
+	$doc->Write( $ARGV[1] );
+}
+
+exit 0;
+
+sub HELP_MESSAGE {
+	print <<END
+makedoc [-n] <text-file> <pdb-file> <title>
+	convert text files to .PDB format
+makedoc -d [-n] <prc/pdb-file> <text-file>
+	convert Doc file back to text file
+-n builds the Doc file without compression (ignored)
+END
+}
+
+sub VERSION_MESSAGE {
+	my $VERSION = do {
+		my @r = (q$Revision: 1.5 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r
+	};
+	print $VERSION, "\n";
+}
+
+1;
+
+__END__
+
+=head1 NAME
+
+makedoc - convert between text and pdb/prc Palm Doc files
+
+=head1 SYNOPSIS
+
+	makedoc <text-file> <pdb-file> <title>
+	makedoc -d <prc|pdb-file> <text-file>
+
+=head1 DESCRIPTION
+
+makedoc is a simple Palm Doc database generator. It's roughly similar to the C++
+version, although the compression flag is ignored (created databases are always
+compressed).
+
+=head1 AUTHOR
+
+Christophe Beauregard E<lt>cpb@cpan.orgE<gt>
+
+=head1 SEE ALSO
+
+Palm::Doc(3)
+
