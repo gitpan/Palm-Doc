@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: htmltopalmdoc,v 1.1 2004/06/13 01:16:23 cpb Exp $
+# $Id: htmltopalmdoc,v 1.2 2004/06/18 00:12:22 cpb Exp $
 
 use strict;
 use Getopt::Std;
@@ -48,7 +48,7 @@ my $formatter = HTML::FormatText->new( 'lm' => 0, 'rm' => 80 );
 my $text = $formatter->format( $tree );
 
 # strip out newlines within paragraphs
-$text =~ s!(\w)[ \t]\n([^\n])!$1 $2!sgi;
+$text =~ s!(\w)[ \t]*\n([^\n])!$1 $2!sgi;
 
 # make sure we're dealing with latin1
 from_to( $text, $charset, 'iso-8859-1' ) unless $charset =~ /8859-1$/;

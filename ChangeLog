@@ -1,3 +1,19 @@
+2004-10-04 21:53  cpb
+
+	* Doc.pm: add creator "MOBI", type "BOOK"
+
+2004-06-17 20:12  cpb
+
+	* htmltopalmdoc: fix newline stripping regex
+
+2004-06-13 09:45  cpb
+
+	* Doc.pm: make more things links
+
+2004-06-13 09:21  cpb
+
+	* Doc.pm: grammar fix
+
 2004-06-12 21:16  cpb
 
 	* MANIFEST, Makefile.PL, htmltopalmdoc: added simple and stupid

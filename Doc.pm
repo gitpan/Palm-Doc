@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2004 Christophe Beauregard
 #
-# $Id: Doc.pm,v 1.11 2004/06/13 00:03:29 cpb Exp $
+# $Id: Doc.pm,v 1.14 2004/10/05 01:53:44 cpb Exp $
 
 use strict;
 
@@ -14,7 +14,7 @@ use Palm::PDB;
 use Palm::Raw();
 use vars qw( $VERSION @ISA );
 
-$VERSION = do { my @r = (q$Revision: 1.11 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.14 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
 
 @ISA = qw( Palm::Raw );
 
@@ -33,7 +33,7 @@ use Palm::Doc;
 =head1 DESCRIPTION
 
 Helper for reading and writing Palm Doc books. The interface is based on
-Palm::ZText since it just makes sense. However, because of the nature
+L<Palm::ZText> since it just makes sense. However, because of the nature
 of these databases, record-level processing is just a Bad Idea. Use
 the C<text> and C<textfile> calls rather than do direct access of the
 C<@records> array.
@@ -67,6 +67,8 @@ sub import
 {
 	&Palm::PDB::RegisterPDBHandlers( __PACKAGE__, [ "REAd", "TEXt" ], );
 	&Palm::PDB::RegisterPRCHandlers( __PACKAGE__, [ "REAd", "TEXt" ], );
+	&Palm::PDB::RegisterPDBHandlers( __PACKAGE__, [ "MOBI", "BOOK" ], );
+	&Palm::PDB::RegisterPRCHandlers( __PACKAGE__, [ "MOBI", "BOOK" ], );
 }
 
 =head2 new
@@ -366,7 +368,7 @@ Bookmarks are unsupported. I've never had any use for them.
 Output databases are always compressed and there's no option to
 disable compression.  I consider this a feature, to be honest.
 
-=head2 Note Character Sets
+=head2 Note On Character Sets
 
 L<Palm::Doc> doesn't do anything with character sets. This might be a bug,
 depending on how you feel about this kind of thing, but the reality is that
@@ -404,9 +406,9 @@ Christophe Beauregard E<lt>cpb@cpan.orgE<gt>
 
 =head1 SEE ALSO
 
-Palm::PDB(3)
+L<Palm::PDB>
 
-Palm::ZText(3)
+L<Palm::ZText>
 
 makedoc
 
@@ -414,8 +416,8 @@ L<http://www.pyrite.org/doc_format.html>
 
 L<http://patb.dyndns.org/Programming/PilotDoc.htm>
 
-Palm::PalmDoc(3) is another CPAN module for handling Doc databases,
-but doesn't use Palm::PDB and doesn't handle reading Docs.
+L<Palm::PalmDoc> is another CPAN module for handling Doc databases,
+but doesn't use L<Palm::PDB> and doesn't handle reading Docs.
 
 L<http://www.df.lth.se/~triad/krad/recode/palm.html> for details on PalmOS
 text encoding
