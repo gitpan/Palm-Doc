@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2004 Christophe Beauregard
 #
-# $Id: Doc.pm,v 1.16 2004/10/07 21:38:01 cpb Exp $
+# $Id: Doc.pm,v 1.18 2005/02/12 16:36:40 cpb Exp $
 
 use strict;
 
@@ -14,7 +14,7 @@ use Palm::PDB;
 use Palm::Raw();
 use vars qw( $VERSION @ISA );
 
-$VERSION = do { my @r = (q$Revision: 1.16 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.18 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
 
 @ISA = qw( Palm::Raw );
 
@@ -248,9 +248,11 @@ sub _decompress_record($$) {
 			my $m = ($och & 0x3fff) >> 3;
 			my $n = ($och & 0x7) + 3;
 
-			# This isn't very perl-like, but a simple substr($out,$lo-$m,$n) doesn't work.
+			# This isn't very perl-like, but a simple
+			# substr($out,$lo-$m,$n) doesn't work.
 			my $lo = length $out;
 			for( my $j = 0; $j < $n; $j ++, $lo ++ ) {
+				die "bad Doc compression" unless ($lo-$m) >= 0;
 				$out .= substr( $out, $lo-$m, 1 );
 			}
 		}
@@ -316,7 +318,8 @@ sub text {
 			$header->{'length'} += length $body;
 		}
 
-		$header->{'recsize'} = $header->{'length'} if $header->{'length'} < DOC_RECSIZE;
+		$header->{'recsize'} = $header->{'length'}
+			if $header->{'length'} < DOC_RECSIZE;
 
 		# pack up the header
 		$header->{'data'} = pack( 'n xx N n n N',
@@ -329,9 +332,18 @@ sub text {
 
 		my $header = $recs->[0];
 		if( defined _parse_headerrec($header) ) {
-			for( my $i = 1; $i <= $#$recs and $i <= $header->{'records'}; $i ++ ) {
-				$body .= _decompress_record( $header->{'version'}, $recs->[$i]->{'data'} );
-			}
+			# a proper Doc file should be fine, but if it's not Doc
+			# compression like some Mobi docs seem to be we want to
+			# bail early. Otherwise we end up with a huge stream of
+			# substr() errors and we _still_ don't get any content.
+			eval {
+				my $maxi = min($#$recs, $header->{'records'});
+				for( my $i = 1; $i <= $maxi; $i ++ ) {
+						$body .= _decompress_record( $header->{'version'},
+							$recs->[$i]->{'data'} );
+				}
+			};
+			return undef if $@;
 		}
 	}
 

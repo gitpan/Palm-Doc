@@ -1,13 +1,8 @@
 use ExtUtils::MakeMaker;
 
-# cpan doesn't seem to be able to find p5-Palm any other way,
-# so if it's not already installed we basically have to force
-# loading a specific version.
-my $p5palm = 'ARENSB/p5-Palm-1.3.0.tar.gz';
-eval {
-	require Palm::PDB;
-	$p5palm = 'Palm::PDB';
-};
+sub MY::postamble {
+	return "ChangeLog:\n\tcvs2cl.pl -r --no-wrap --show-dead -S --utc\n\n";
+}
 
 WriteMakefile(
 	'NAME'              => 'Palm::Doc',
@@ -17,7 +12,8 @@ WriteMakefile(
 	'AUTHOR' => 'Christophe Beauregard <cpb@cpan.org>',
 	'ABSTRACT' => 'Module for processing PalmDoc databases',
 	'PREREQ_PM' => {
-		$p5palm => 0,
+		'Palm::PDB' => 1.0,
+		'Palm::Raw' => 1.0,
 		'HTML::TreeBuilder' => 0,
 		'HTML::FormatText' => 0,
 		'Getopt::Std' => 0,
@@ -26,4 +22,6 @@ WriteMakefile(
 		'Test::More' => 0.46,
 	},
 	'EXE_FILES' => [ 'makepalmdoc', 'mobisucks', 'htmltopalmdoc' ],
+	'clean' => { FILES => 'ChangeLog' },
+	'depend' => { 'distdir' => 'ChangeLog' },
 );

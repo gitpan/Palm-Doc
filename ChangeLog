@@ -1,201 +1,322 @@
-2004-10-07 19:52  cpb
+2005-02-12 16:38  cpb
 
-	* MANIFEST, test.pl: okay, cuckoos is a bit large for distribution
+	* Makefile.PL (1.12):
 
-2004-10-07 18:42  cpb
+	add some automated ChangeLog creation to the Makefile.PL
 
-	* MANIFEST, Makefile.PL, test.pl: *: use Test::More
-	
+2005-02-12 16:36  cpb
+
+	* Doc.pm (1.18), makepalmdoc (1.5), mobisucks (1.6):
+
+	Got a prc from a user which claims to be a TEXt/REAd format, but doesn't
+	use Doc compression and causes things to blow up. This change allows us to
+	catch these kinds of files. Hopefully.
+
+2004-10-09 01:19  cpb
+
+	* Doc.pm (1.17):
+
+	force version increment
+
+2004-10-09 01:18  cpb
+
+	* Makefile.PL (1.11), README (1.2), test.pl (1.8):
+
+	cpan testers can't find p5-Palm, so hack around it...
+
+2004-10-09 01:04  cpb
+
+	* Makefile.PL (1.10):
+
+	p5-Palm hack didn't work
+
+2004-10-07 23:52  cpb
+
+	* MANIFEST (1.7), test.pl (1.7):
+
+	okay, cuckoos is a bit large for distribution
+
+2004-10-07 22:42  cpb
+
+	* MANIFEST (1.6), Makefile.PL (1.9), test.pl (1.6):
+
+	*: use Test::More
+
 	*: add cuckoos.prc to test script and MANIFEST
 
-2004-10-07 17:38  cpb
+2004-10-07 21:38  cpb
 
-	* Doc.pm: force version increment
+	* Doc.pm (1.16):
 
-2004-10-07 17:36  cpb
+	force version increment
 
-	* Makefile.PL: gruesome hack to force installation of p5-Palm if
-	it's missing. It's probably better if I don't explain further.
+2004-10-07 21:36  cpb
 
-2004-10-05 17:13  cpb
+	* Makefile.PL (1.8):
 
-	* Makefile.PL: remove some quotes
+	gruesome hack to force installation of p5-Palm if it's missing. It's
+	probably better if I don't explain further.
 
-2004-10-05 17:10  cpb
+2004-10-05 21:13  cpb
 
-	* Doc.pm: force version increment
+	* Makefile.PL (1.7):
 
-2004-10-05 17:10  cpb
+	remove some quotes
 
-	* Makefile.PL, htmltopalmdoc, mobisucks: use HTML::Entities to
-	attempt to handle HTML character entities.  Unfortunately,
-	HTML::Entities can't handle anything that isn't represented in
-	8859-1 so there's a little left over. We manually convert the stuff
-	that we know about (mostly quotes) and strip out the rest.
+2004-10-05 21:10  cpb
 
-2004-10-05 17:08  cpb
+	* Doc.pm (1.15):
 
-	* cuckoos.prc: test file using MOBI/BOOK type
+	force version increment
 
-2004-10-05 10:46  cpb
+2004-10-05 21:10  cpb
 
-	* Makefile.PL: update dependencies for the HTML conversion scripts.
+	* Makefile.PL (1.6), htmltopalmdoc (1.3), mobisucks (1.5):
 
-2004-10-04 21:53  cpb
+	use HTML::Entities to attempt to handle HTML character entities.
+	Unfortunately, HTML::Entities can't handle anything that isn't represented
+	in 8859-1 so there's a little left over. We manually convert the stuff that
+	we know about (mostly quotes) and strip out the rest.
 
-	* Doc.pm: add creator "MOBI", type "BOOK"
+2004-10-05 21:08  cpb
 
-2004-06-17 20:12  cpb
+	* cuckoos.prc (1.1):
 
-	* htmltopalmdoc: fix newline stripping regex
+	test file using MOBI/BOOK type
 
-2004-06-13 09:45  cpb
+2004-10-05 14:46  cpb
 
-	* Doc.pm: make more things links
+	* Makefile.PL (1.5):
 
-2004-06-13 09:21  cpb
+	update dependencies for the HTML conversion scripts.
 
-	* Doc.pm: grammar fix
+2004-10-05 01:53  cpb
 
-2004-06-12 21:16  cpb
+	* Doc.pm (1.14):
 
-	* MANIFEST, Makefile.PL, htmltopalmdoc: added simple and stupid
-	HTML to Palm Doc converter.
+	add creator "MOBI", type "BOOK"
 
-2004-06-12 20:03  cpb
+2004-06-18 00:12  cpb
 
-	* Doc.pm: add some documentation covering PalmOS character sets.
+	* htmltopalmdoc (1.2):
 
-2004-06-12 20:03  cpb
+	fix newline stripping regex
 
-	* test.pl: use latin1.txt rather than README for test purposes.
+2004-06-13 13:45  cpb
 
-2004-06-12 20:02  cpb
+	* Doc.pm (1.13):
 
-	* MANIFEST: added latin1.txt test file
+	make more things links
 
-2004-06-12 19:59  cpb
+2004-06-13 13:21  cpb
 
-	* latin1.txt: added a latin-1 test file
+	* Doc.pm (1.12):
 
-2004-06-12 19:58  cpb
+	grammar fix
 
-	* makepalmdoc: handle character set conversion
+2004-06-13 01:16  cpb
 
-2004-04-14 22:25  cpb
+	* MANIFEST (1.5), Makefile.PL (1.4), htmltopalmdoc (1.1):
 
-	* makepalmdoc, mobisucks, test.pl: instantiate Palm::PDB for
-	loading
+	added simple and stupid HTML to Palm Doc converter.
 
-2004-04-14 21:56  cpb
+2004-06-13 00:03  cpb
 
-	* META.yml: don't need to commit that
+	* Doc.pm (1.11):
 
-2004-04-14 21:56  cpb
+	add some documentation covering PalmOS character sets.
 
-	* Doc.pm: minor loop optimization
+2004-06-13 00:03  cpb
 
-2004-04-14 21:55  cpb
+	* test.pl (1.5):
 
-	* mobisucks: need to keep space when we remove line breaks
+	use latin1.txt rather than README for test purposes.
 
-2004-04-14 21:54  cpb
+2004-06-13 00:02  cpb
 
-	* makepalmdoc: minor undef bug fix
+	* MANIFEST (1.4):
 
-2004-04-12 21:09  cpb
+	added latin1.txt test file
 
-	* Makefile.PL, makedoc, makepalmdoc, MANIFEST: renamed makedoc to
-	makepalmdoc
+2004-06-12 23:59  cpb
 
-2004-04-12 21:06  cpb
+	* latin1.txt (1.1):
 
-	* Doc.pm: minor documentation fix
+	added a latin-1 test file
 
-2004-04-12 21:06  cpb
+2004-06-12 23:58  cpb
 
-	* mobisucks: - handle non-Mobi docs gracefully - post-process
-	HTML::FormatText output to remove newlines.
+	* makepalmdoc (1.4):
 
-2004-04-12 21:04  cpb
+	handle character set conversion
 
-	* Makefile.PL: added EXE_FILES to Makefile.PL
+2004-04-15 02:25  cpb
 
-2004-04-12 01:04  cpb
+	* makepalmdoc (1.3), mobisucks (1.4), test.pl (1.4):
 
-	* Doc.pm: no compression comment
+	instantiate Palm::PDB for loading
 
-2004-04-12 01:02  cpb
+2004-04-15 01:56  cpb
 
-	* makedoc: added POD
+	* META.yml (1.2[DEAD]):
 
-2004-04-12 01:02  cpb
+	don't need to commit that
 
-	* MANIFEST: added makedoc and mobisucks
+2004-04-15 01:56  cpb
 
-2004-04-12 01:02  cpb
+	* Doc.pm (1.10):
 
-	* mobisucks: initial commit
+	minor loop optimization
 
-2004-04-12 00:50  cpb
+2004-04-15 01:55  cpb
 
-	* Doc.pm: - fixed an off-by-one in compression - added more docs
+	* mobisucks (1.3):
 
-2004-04-12 00:10  cpb
+	need to keep space when we remove line breaks
 
-	* makedoc: use our
+2004-04-15 01:54  cpb
 
-2004-04-12 00:10  cpb
+	* makepalmdoc (1.2):
 
-	* Doc.pm: - handle type B decompression one character at a time -
-	documentation cleanups
+	minor undef bug fix
 
-2004-04-11 23:32  cpb
+2004-04-13 01:09  cpb
 
-	* Doc.pm: - compression/decompression now works correctly.  -
-	restructuring... the whole "make sane" concept is too unweildy to
-	actually work
+	* Makefile.PL (1.3), makedoc (1.6[DEAD]), makepalmdoc (1.1),
+	  MANIFEST (1.3):
 
-2004-04-09 00:39  cpb
+	renamed makedoc to makepalmdoc
 
-	* Doc.pm: more fixes
+2004-04-13 01:06  cpb
 
-2004-04-09 00:39  cpb
+	* Doc.pm (1.9):
 
-	* test.pl: resource, convert to text
+	minor documentation fix
 
-2004-04-09 00:39  cpb
+2004-04-13 01:06  cpb
 
-	* makedoc: mostly implemented
+	* mobisucks (1.2):
 
-2004-04-09 00:05  cpb
+	- handle non-Mobi docs gracefully
+	- post-process HTML::FormatText output to remove newlines.
 
-	* makedoc: works, kinda
+2004-04-13 01:04  cpb
 
-2004-04-08 23:56  cpb
+	* Makefile.PL (1.2):
 
-	* Doc.pm: - implemented decompress. Might even work.  - handle
-	resource databases.
+	added EXE_FILES to Makefile.PL
 
-2004-04-08 23:56  cpb
+2004-04-12 05:04  cpb
 
-	* makedoc: added empty
+	* Doc.pm (1.8):
 
-2004-04-08 22:56  cpb
+	no compression comment
 
-	* test.pl: make test script do something interesting
+2004-04-12 05:02  cpb
 
-2004-04-08 22:47  cpb
+	* makedoc (1.5):
 
-	* Doc.pm: runs
+	added POD
 
-2004-04-08 21:07  cpb
+2004-04-12 05:02  cpb
 
-	* Doc.pm, MANIFEST, META.yml, Makefile.PL, README, test.pl: Initial
-	revision
+	* MANIFEST (1.2):
 
-2004-04-08 21:07  cpb
+	added makedoc and mobisucks
 
-	* Doc.pm, MANIFEST, META.yml, Makefile.PL, README, test.pl: initial
-	import
+2004-04-12 05:02  cpb
+
+	* mobisucks (1.1):
+
+	initial commit
+
+2004-04-12 04:50  cpb
+
+	* Doc.pm (1.7):
+
+	- fixed an off-by-one in compression
+	- added more docs
+
+2004-04-12 04:10  cpb
+
+	* makedoc (1.4):
+
+	use our
+
+2004-04-12 04:10  cpb
+
+	* Doc.pm (1.6):
+
+	- handle type B decompression one character at a time
+	- documentation cleanups
+
+2004-04-12 03:32  cpb
+
+	* Doc.pm (1.5):
+
+	- compression/decompression now works correctly.
+	- restructuring... the whole "make sane" concept is too unweildy to actually work
+
+2004-04-09 04:39  cpb
+
+	* Doc.pm (1.4):
+
+	more fixes
+
+2004-04-09 04:39  cpb
+
+	* test.pl (1.3):
+
+	resource, convert to text
+
+2004-04-09 04:39  cpb
+
+	* makedoc (1.3):
+
+	mostly implemented
+
+2004-04-09 04:05  cpb
+
+	* makedoc (1.2):
+
+	works, kinda
+
+2004-04-09 03:56  cpb
+
+	* Doc.pm (1.3):
+
+	- implemented decompress. Might even work.
+	- handle resource databases.
+
+2004-04-09 03:56  cpb
+
+	* makedoc (1.1):
+
+	added empty
+
+2004-04-09 02:56  cpb
+
+	* test.pl (1.2):
+
+	make test script do something interesting
+
+2004-04-09 02:47  cpb
+
+	* Doc.pm (1.2):
+
+	runs
+
+2004-04-09 01:07  cpb
+
+	* Doc.pm (1.1), MANIFEST (1.1), META.yml (1.1), Makefile.PL (1.1),
+	  README (1.1), test.pl (1.1):
+
+	Initial revision
+
+2004-04-09 01:07  cpb
+
+	* Doc.pm (1.1.1.1), MANIFEST (1.1.1.1), META.yml (1.1.1.1),
+	  Makefile.PL (1.1.1.1), README (1.1.1.1), test.pl (1.1.1.1):
+
+	initial import
 

@@ -2,7 +2,7 @@
 #
 # perl version of makedoc
 #
-# $Id: makepalmdoc,v 1.4 2004/06/12 23:58:37 cpb Exp $
+# $Id: makepalmdoc,v 1.5 2005/02/12 16:36:40 cpb Exp $
 
 use strict;
 use Getopt::Std;
@@ -23,8 +23,13 @@ if( @ARGV < 2 ) {
 if( $opt_d ) {
 	my $doc = new Palm::PDB;
 	$doc->Load( $ARGV[0] );
+	my $text = $doc->text();
+	if( not defined $text ) {
+		print STDERR "This doesn't seem to be a Doc file!\n";
+		exit -1;
+	}
 	open F, "> $ARGV[1]" or die "$!";
-	print F decode( "iso-8859-1", $doc->text(), Encode::FB_WARN );
+	print F decode( "iso-8859-1", $text, Encode::FB_WARN );
 	close F;
 } else {
 	my $doc = new Palm::Doc;
@@ -46,7 +51,7 @@ END
 
 sub VERSION_MESSAGE {
 	my $VERSION = do {
-		my @r = (q$Revision: 1.4 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r
+		my @r = (q$Revision: 1.5 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r
 	};
 	print $VERSION, "\n";
 }

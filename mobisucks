@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# $Id: mobisucks,v 1.5 2004/10/05 21:10:27 cpb Exp $
+# $Id: mobisucks,v 1.6 2005/02/12 16:36:40 cpb Exp $
 
 use strict;
 use HTML::TreeBuilder;
@@ -13,7 +13,7 @@ my $doc = new Palm::PDB;
 $doc->Load( $ARGV[0] );
 
 my $text = $doc->text();
-if( $text !~ /^<[a-z]+>/i ) {
+if( (not defined $text) or $text !~ /^<[a-z]+>/i ) {
 	print STDERR "$ARGV[0] doesn't look like a Mobireader document\n";
 	exit 1;
 }

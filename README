@@ -2,6 +2,9 @@ Palm::Doc
 
 PalmDoc helper module for Palm::PDB (p5-Palm).
 
+This module requires p5-Palm to be installed. Unfortunately, CPAN doesn't
+seem able to index it properly so you'll probably have to get it manually.
+
 LICENSING
 =========
 
