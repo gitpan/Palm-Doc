@@ -5,5 +5,5 @@ README
 test.pl
 ChangeLog
 META.yml                                 Module meta-data (added by MakeMaker)
-makedoc
+makepalmdoc
 mobisucks

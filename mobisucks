@@ -1,6 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 #
-# $Id: mobisucks,v 1.1 2004/04/12 05:02:12 cpb Exp $
+# $Id: mobisucks,v 1.2 2004/04/13 01:06:00 cpb Exp $
 
 use strict;
 use HTML::TreeBuilder;
@@ -11,10 +11,22 @@ use Palm::Doc;
 my $doc = new Palm::Doc;
 $doc->Load( $ARGV[0] );
 
-my $tree = HTML::TreeBuilder->new_from_content( $doc->text() );
-my $formatter = HTML::FormatText->new( leftmargin => 0, rightmargin => 80 );
+my $text = $doc->text();
+if( $text !~ /^<[a-z]+>/i ) {
+	print STDERR "$ARGV[0] doesn't look like a Mobireader document\n";
+	exit 1;
+}
 
-$doc->text( $formatter->format( $tree ) );
+my $tree = HTML::TreeBuilder->new_from_content( $text );
+my $formatter = HTML::FormatText->new( leftmargin => 0, rightmargin => 80 );
+my $text = $formatter->format( $tree );
+
+# FormatText's margins aren't really appropriate for PDA reading. Better to
+# remove them entirely and let the reader handle that stuff. We really should
+# just write our own formatter around HTML::TreeBuilder...
+$text =~ s!([^\n])\n([^\n])!\1\2!sg;
+
+$doc->text( $text );
 $doc->Write( $ARGV[0] );
 
 exit 0;
@@ -34,7 +46,7 @@ mobisucks - convert Mobipocket reader files to regular text Palm Docs.
 I hate Mobipocket reader, but it's used by quite a few ebook providers
 (http://www.baen.com/library/, http://www.blackmask.com/, etc) rather than a more
 useful format like straight PalmDoc, Ztxt, or even Plucker. This little script
-converts Mobipocket to bog-standard text.
+converts Mobipocket to bog-standard PalmDoc text.
 
 =head1 AUTHOR
 

@@ -1,3 +1,21 @@
+2004-04-12 21:09  cpb
+
+	* Makefile.PL, makedoc, makepalmdoc, MANIFEST: renamed makedoc to
+	makepalmdoc
+
+2004-04-12 21:06  cpb
+
+	* Doc.pm: minor documentation fix
+
+2004-04-12 21:06  cpb
+
+	* mobisucks: - handle non-Mobi docs gracefully - post-process
+	HTML::FormatText output to remove newlines.
+
+2004-04-12 21:04  cpb
+
+	* Makefile.PL: added EXE_FILES to Makefile.PL
+
 2004-04-12 01:04  cpb
 
 	* Doc.pm: no compression comment

@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2004 Christophe Beauregard
 #
-# $Id: Doc.pm,v 1.8 2004/04/12 05:04:54 cpb Exp $
+# $Id: Doc.pm,v 1.9 2004/04/13 01:06:16 cpb Exp $
 
 use strict;
 
@@ -14,7 +14,7 @@ use Palm::PDB;
 use Palm::Raw();
 use vars qw( $VERSION @ISA );
 
-$VERSION = do { my @r = (q$Revision: 1.8 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.9 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
 
 @ISA = qw( Palm::Raw );
 
@@ -371,7 +371,7 @@ Christophe Beauregard E<lt>cpb@cpan.orgE<gt>
 
 Palm::PDB(3)
 
-Palm::StdAppInfo(3)
+Palm::ZText(3)
 
 makedoc
 
