@@ -1,12 +1,13 @@
 #!/usr/bin/perl
 #
-# $Id: mobisucks,v 1.4 2004/04/15 02:25:49 cpb Exp $
+# $Id: mobisucks,v 1.5 2004/10/05 21:10:27 cpb Exp $
 
 use strict;
 use HTML::TreeBuilder;
 use HTML::FormatText;
 use Palm::PDB;
 use Palm::Doc;
+use HTML::Entities;
 
 my $doc = new Palm::PDB;
 $doc->Load( $ARGV[0] );
@@ -20,6 +21,20 @@ if( $text !~ /^<[a-z]+>/i ) {
 my $tree = HTML::TreeBuilder->new_from_content( $text );
 my $formatter = HTML::FormatText->new( leftmargin => 0, rightmargin => 80 );
 my $text = $formatter->format( $tree );
+
+decode_entities($text); # convert HTML entities to 8859-1
+
+# decode_entities is great, except for entities that can't be
+# represented in 8859-1. Strip those out or, if it's something we're
+# aware of, do a quick and dirty conversion
+$text =~ s/&\#821[12];?/-/g;
+$text =~ s/&\#821[678];?/'/g;
+$text =~ s/&\#822[012];?/"/g;
+
+# strip out the rest
+$text =~ s/&\#\d+;?/?/g;
+$text =~ s/&\#[xX][\da-fA-F]+;?/?/g;
+$text =~ s/&\w+;?/?/g;
 
 # FormatText's margins aren't really appropriate for PDA reading. Better to
 # remove them entirely and let the reader handle that stuff. We really should

@@ -1,3 +1,27 @@
+2004-10-05 17:13  cpb
+
+	* Makefile.PL: remove some quotes
+
+2004-10-05 17:10  cpb
+
+	* Doc.pm: force version increment
+
+2004-10-05 17:10  cpb
+
+	* Makefile.PL, htmltopalmdoc, mobisucks: use HTML::Entities to
+	attempt to handle HTML character entities.  Unfortunately,
+	HTML::Entities can't handle anything that isn't represented in
+	8859-1 so there's a little left over. We manually convert the stuff
+	that we know about (mostly quotes) and strip out the rest.
+
+2004-10-05 17:08  cpb
+
+	* cuckoos.prc: test file using MOBI/BOOK type
+
+2004-10-05 10:46  cpb
+
+	* Makefile.PL: update dependencies for the HTML conversion scripts.
+
 2004-10-04 21:53  cpb
 
 	* Doc.pm: add creator "MOBI", type "BOOK"
