@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# $Id: mobisucks,v 1.6 2005/02/12 16:36:40 cpb Exp $
+# $Id: mobisucks,v 1.7 2005/02/14 03:50:53 cpb Exp $
 
 use strict;
 use HTML::TreeBuilder;
@@ -59,9 +59,14 @@ mobisucks - convert Mobipocket reader files to regular text Palm Docs.
 =head1 DESCRIPTION
 
 I hate Mobipocket reader, but it's used by quite a few ebook providers
-(http://www.baen.com/library/, http://www.blackmask.com/, etc) rather than a more
-useful format like straight PalmDoc, Ztxt, or even Plucker. This little script
-converts Mobipocket to bog-standard PalmDoc text.
+(http://www.baen.com/library/, http://www.blackmask.com/, etc) rather than
+a more useful format like straight PalmDoc, Ztxt, or even Plucker. This
+little script converts Mobipocket to bog-standard PalmDoc text.
+
+=head1 BUGS
+
+Doesn't handle every Mobipocket book, nor is the output always
+great. Overall, it's a bit of a hack.
 
 =head1 AUTHOR
 

@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2004 Christophe Beauregard
 #
-# $Id: Doc.pm,v 1.18 2005/02/12 16:36:40 cpb Exp $
+# $Id: Doc.pm,v 1.19 2005/05/12 01:36:49 cpb Exp $
 
 use strict;
 
@@ -14,7 +14,7 @@ use Palm::PDB;
 use Palm::Raw();
 use vars qw( $VERSION @ISA );
 
-$VERSION = do { my @r = (q$Revision: 1.18 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.19 $ =~ /\d+/g); sprintf "%d."."%02d" x $#r, @r };
 
 @ISA = qw( Palm::Raw );
 
@@ -326,7 +326,7 @@ sub text {
 			$header->{'version'}, $header->{'length'},
 			$header->{'records'}, $header->{'recsize'}, 0 );
 
-	} elsif( defined wantarray() ) {
+	} elsif( defined wantarray ) {
 
 		my $recs = $prc ? $self->{'resources'} : $self->{'records'};
 
@@ -337,6 +337,7 @@ sub text {
 			# bail early. Otherwise we end up with a huge stream of
 			# substr() errors and we _still_ don't get any content.
 			eval {
+				sub min { return ($_[0]<$_[1]) ? $_[0] : $_[1] }
 				my $maxi = min($#$recs, $header->{'records'});
 				for( my $i = 1; $i <= $maxi; $i ++ ) {
 						$body .= _decompress_record( $header->{'version'},

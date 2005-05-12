@@ -1,3 +1,15 @@
+2005-05-12 01:36  cpb
+
+	* Doc.pm (1.19):
+
+	odd... somewhere, the min() function went away.
+
+2005-02-14 03:50  cpb
+
+	* mobisucks (1.7):
+
+	clarify docs
+
 2005-02-12 16:38  cpb
 
 	* Makefile.PL (1.12):
